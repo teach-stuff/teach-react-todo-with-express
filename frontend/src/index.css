@@ -1,0 +1,108 @@
+body {
+  background: #eee;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+  background: #fff;
+  margin: 50px auto;
+  padding: 30px;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+form {
+  padding-bottom: 15px;
+  position: relative;
+}
+
+form input {
+  width: 100%;
+  font-size: 28px;
+  height: 65px;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  outline: none;
+}
+form input:focus {
+  border-bottom-color: #ccc;
+  box-shadow: 0 1px 0 #ccc;
+}
+
+form button {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  border-radius: 100%;
+  border: 0;
+  font-size: 40px;
+  width: 50px;
+  padding: 0;
+  padding-bottom: 6px;
+  line-height: 44px;
+  background: lightgreen;
+  font-weight: 300;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+ul li {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  position: relative;
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+ul li button {
+  position: absolute;
+  top: 3px;
+  font-size: 18px;
+  padding: 0;
+  line-height: 26px;
+  width: 28px;
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 100%;
+  color: #bbb;
+}
+
+ul li button.done {
+  left: 0;
+}
+
+ul li.complete button.done {
+  background: lightgreen;
+  border-color: transparent;
+  color: #000;
+}
+
+ul li button.delete {
+  position: absolute;
+  right: 0;
+  border: 0;
+  font-size: 14px;
+  opacity: 0;
+}
+
+ul li:hover button.delete {
+  opacity: 0.5;
+}
+
+ul li button.delete:hover {
+  opacity: 1;
+}
+
+.actions {
+  display: flex;
+}
+
+.actions .left {
+  flex: 1 1 auto;
+}
