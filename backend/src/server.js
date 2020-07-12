@@ -23,7 +23,9 @@ app.put('/create', (req, res) => {
 });
 
 app.post('/toggle', (req, res) => {
-  const { index } = req.query;
+  const { index } = req.body;
+  console.log(index);
+  //const { index } = req.query;
   const todo = todos[index];
   if (todo === undefined) {
     res.sendStatus(400);
@@ -36,9 +38,36 @@ app.post('/toggle', (req, res) => {
 });
 
 // TODO: @Gagan, implement these
-// app.delete('/delete', (req, res) => {});
-// app.post('/edit-name', (req, res) => {});
+app.delete('/delete', (req, res) => {
+  const { index } = req.body;
+  console.log(index);
+  //const { index } = req.query;
+  const todo = todos[index];
+  if (todo === undefined) {
+    res.sendStatus(400);
+    res.send({ error: 'Invalid todo item index' });
+    return;
+  } else {
+    todos.splice(index, 1);
+  }
+  res.send(todos);
+});
+
+app.post('/editname', (req, res) => {
+  const { name, index } = req.body;
+  console.log(name);
+  const todo = todos[index];
+  if (todo === undefined) {
+    res.sendStatus(400);
+    res.send({ error: 'Invalid todo item index' });
+    return;
+  } else {
+    todos[index] = { ...todo, name };
+  }
+
+  res.send(todos);
+});
 
 app.listen(port, () =>
-  console.log(`Example app listening at http://localhost:${port}`),
+  console.log(`Example app listening at http://localhost:${port}`)
 );
