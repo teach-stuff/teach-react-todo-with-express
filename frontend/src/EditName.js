@@ -5,6 +5,8 @@ const EditName = ({ todo, index }) => {
   const [edited, setEdited] = useState(todo.name);
   const debounceTimeout = useRef(undefined);
 
+  console.log('component rendered');
+
   const editName = async (name) => {
     if (name !== '' || name === undefined) {
       const payload = { name, index };
