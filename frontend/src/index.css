@@ -44,6 +44,11 @@ form button {
   background: lightgreen;
   font-weight: 300;
 }
+.submit {
+  background-color: white;
+  color: black;
+  border: 2px solid #4caf50;
+}
 
 ul {
   list-style: none;
@@ -96,6 +101,21 @@ ul li:hover button.delete {
 }
 
 ul li button.delete:hover {
+  opacity: 1;
+}
+ul li button.edit {
+  position: absolute;
+  right: 0;
+  border: 0;
+  font-size: 14px;
+  opacity: 0;
+}
+
+ul li:hover button.edit {
+  opacity: 0.5;
+}
+
+ul li button.delete:edit {
   opacity: 1;
 }
 
