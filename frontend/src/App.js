@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Item from './Item';
+import EditName from './EditName';
 
-const url = 'http://localhost:3001/';
+export const url = 'http://localhost:3001/';
 
 function App() {
   const [status, setStatus] = useState('LOADING');
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
-  const [edittext, setEdittext] = useState('');
 
   useEffect(() => {
     const promiseFunc = async () => {
@@ -48,14 +47,10 @@ function App() {
     }
   };
 
-  const toogle = async (i) => {
-    console.log(i);
-    const payload = { index: i };
+  const toggle = async (index) => {
     try {
-      const response = await fetch(`${url}toggle`, {
+      const response = await fetch(`${url}toggle?index=${index}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
       });
       const todos = await response.json();
       setTodos(todos);
@@ -86,26 +81,26 @@ function App() {
     }
   };
 
-  const editName = async (i) => {
-    console.log(edittext + '-' + i);
-    if (edittext !== '' || edittext === undefined) {
-      const payload = { name: edittext, index: i };
-      try {
-        const response = await fetch(`${url}editname`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        const todos = await response.json();
-        setTodos(todos);
-        setStatus('SUCCESS');
-        setInput('');
-      } catch (error) {
-        console.log('error', error);
-        setStatus('ERROR');
-      }
-    }
-  };
+  // const editName = async (i) => {
+  //   console.log(edittext + '-' + i);
+  //   if (edittext !== '' || edittext === undefined) {
+  //     const payload = { name: edittext, index: i };
+  //     try {
+  //       const response = await fetch(`${url}editname`, {
+  //         method: 'POST',
+  //         headers: { 'Content-Type': 'application/json' },
+  //         body: JSON.stringify(payload),
+  //       });
+  //       const todos = await response.json();
+  //       setTodos(todos);
+  //       setStatus('SUCCESS');
+  //       setInput('');
+  //     } catch (error) {
+  //       console.log('error', error);
+  //       setStatus('ERROR');
+  //     }
+  //   }
+  // };
 
   return (
     <div
@@ -128,20 +123,14 @@ function App() {
 
       <ul className="todo-list">
         {todos.map((todo, index) => (
-          <li className={todo.completed ? 'complete' : 'uncompleted'}>
-            <button onClick={() => toogle(index)} className="done">
+          <li
+            key={index}
+            className={todo.completed ? 'complete' : 'uncompleted'}
+          >
+            <button onClick={() => toggle(index)} className="done">
               &#10003;
             </button>
-            <form onSubmit={() => editName(index)}>
-              <textarea
-                value={todo.name}
-                onChange={(event) => setEdittext(event.target.value)}
-              ></textarea>
-              <button type="submit" className="submit" value="Submit">
-                {' '}
-                &#x1f589;
-              </button>
-            </form>
+            <EditName todo={todo} index={index} />
             <button
               className="delete"
               onClick={() => {
@@ -171,7 +160,7 @@ function App() {
               setTodos(
                 todos.filter(function (s) {
                   return !s.completed;
-                })
+                }),
               );
             }}
           >

@@ -23,10 +23,12 @@ app.put('/create', (req, res) => {
 });
 
 app.post('/toggle', (req, res) => {
-  const { index } = req.body;
-  console.log(index);
-  //const { index } = req.query;
+  const { index } = req.query;
+  console.log('index', index);
+
   const todo = todos[index];
+  console.log('todo', todo);
+
   if (todo === undefined) {
     res.sendStatus(400);
     res.send({ error: 'Invalid todo item index' });
@@ -65,9 +67,9 @@ app.post('/editname', (req, res) => {
     todos[index] = { ...todo, name };
   }
 
-  res.send(todos);
+  res.send({ name });
 });
 
 app.listen(port, () =>
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Example app listening at http://localhost:${port}`),
 );
