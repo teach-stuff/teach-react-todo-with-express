@@ -34,8 +34,10 @@ const EditName = ({ todo, index }) => {
         setEdited(name);
 
         if (debounceTimeout.current) {
+          console.log('cleared previous timeout');
           clearTimeout(debounceTimeout.current);
         }
+        console.log('set new timeout');
         debounceTimeout.current = setTimeout(() => {
           editName(name);
         }, 1000);
